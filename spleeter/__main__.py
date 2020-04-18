@@ -10,10 +10,10 @@
 import sys
 import warnings
 
-from . import SpleeterError
-from .commands import create_argument_parser
-from .utils.configuration import load_configuration
-from .utils.logging import (
+from spleeter import SpleeterError
+from spleeter.commands import create_argument_parser
+from spleeter.utils.configuration import load_configuration
+from spleeter.utils.logging import (
     enable_logging,
     enable_tensorflow_logging,
     get_logger)
@@ -37,11 +37,11 @@ def main(argv):
         if arguments.verbose:
             enable_tensorflow_logging()
         if arguments.command == 'separate':
-            from .commands.separate import entrypoint
+            from spleeter.commands.separate import entrypoint
         elif arguments.command == 'train':
-            from .commands.train import entrypoint
+            from spleeter.commands.train import entrypoint
         elif arguments.command == 'evaluate':
-            from .commands.evaluate import entrypoint
+            from spleeter.commands.evaluate import entrypoint
         params = load_configuration(arguments.configuration)
         entrypoint(arguments, params)
     except SpleeterError as e:
